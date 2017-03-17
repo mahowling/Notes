@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Notes.Entities.Extensions
+namespace Notes.Data.Extensions
 {
     internal static class ModelBuilderExtensions
     {

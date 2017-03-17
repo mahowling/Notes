@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Notes.Entities;
-using Notes.Entities.Models;
+using Notes.Data;
+using Notes.Models;
 using System.Linq;
 using System.Linq.Expressions;
 using Notes.Services.Internal;

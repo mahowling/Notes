@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Notes.Entities.Models
+namespace Notes.Models
 {
     public class Note
     {

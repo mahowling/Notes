@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Notes.Entities.Models;
-using Notes.Entities.Extensions;
+using Notes.Models;
+using Notes.Data.Extensions;
 using System;
 
-namespace Notes.Entities
+namespace Notes.Data
 {
     public class DataContext : DbContext, IDataContext
     {

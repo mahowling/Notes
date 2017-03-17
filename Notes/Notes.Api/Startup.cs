@@ -28,12 +28,12 @@ namespace Notes.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //Add the Context
-            services.AddDbContext<Entities.DataContext>();
+            services.AddDbContext<Data.DataContext>();
             
             // Add framework services.
             services.AddMvc();
 
-            services.AddSingleton<Entities.IDataContext, Entities.DataContext>();
+            services.AddSingleton<Data.IDataContext, Data.DataContext>();
             services.AddSingleton<Services.INoteRepository, Services.NoteRepository>();
 
         }

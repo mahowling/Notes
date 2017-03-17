@@ -1,5 +1,5 @@
-﻿using Notes.Entities.Models;
-using Notes.Entities;
+﻿using Notes.Models;
+using Notes.Data;
 using Notes.Services;
 
 namespace Notes.Console

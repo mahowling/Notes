@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Notes.Entities.Models;
+using Notes.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Notes.Entities
+namespace Notes.Data
 {
     public interface IDataContext
     {

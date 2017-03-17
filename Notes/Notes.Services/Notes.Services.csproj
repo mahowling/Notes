@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Notes.Entities\Notes.Entities.csproj" />
+    <ProjectReference Include="..\Notes.Data\Notes.Data.csproj" />
+    <ProjectReference Include="..\Notes.Models\Notes.Models.csproj" />
   </ItemGroup>
 
 </Project>

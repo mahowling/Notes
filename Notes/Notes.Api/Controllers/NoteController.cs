@@ -1,5 +1,5 @@
 ﻿using Notes.Services;
-using Notes.Entities.Models;
+using Notes.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using System;
