@@ -1,0 +1,333 @@
+﻿<UserControl x:Class="Notes.Wpf.UI.UserControls.NoteControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Notes.Wpf.UI.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200">
+
+    <UserControl.Resources>
+        <Style x:Key="TitleTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MaxLength" Value="20"/>
+        </Style>
+
+        <Style x:Key="ContentStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="AcceptsTab" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MaxLength" Value="512"/>
+        </Style>
+
+        <Style x:Key="TickPath" TargetType="{x:Type Path}">
+            <Setter Property="StrokeThickness" Value="5"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Data" Value="M 0,30 L 20,50 M 18,50 C 19,47 25,25 50,0"/>
+        </Style>
+
+        <Style x:Key="CompleteButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Height="20.00">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Name="leftEllipse" Stroke="Gray" StrokeThickness="2" Fill="Transparent"
+                                  Grid.Row="0">
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathFigure StartPoint="10,1">
+                                            <ArcSegment IsLargeArc="True"
+                                                        Size="5, 5"
+                                                        Point="10, 19"
+                                                        SweepDirection="Counterclockwise" />
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </Path.Data>
+                            </Path>
+                            <Path Name="rightEllipse" Stroke="Gray" StrokeThickness="2" Fill="Transparent" Grid.Column="2">
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathFigure StartPoint="0,1">
+                                            <ArcSegment IsLargeArc="True"
+                                                        Size="5, 5"
+                                                        Point="0, 19"
+                                                        SweepDirection="Clockwise" />
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </Path.Data>
+                            </Path>
+                            <Grid Grid.Column="1" >
+                                <Path Name="contentBackground" StrokeThickness="0" Fill="Transparent" Grid.Column="2"
+                                      Data="M 0,1 L 0,19 L 65,19 L 65,1 Z"/>
+                                <Path Name="topLine" Stroke="Gray" StrokeThickness="2" Fill="Transparent" Grid.Column="2"
+                                      Data="M 0,1 L 65,1"/>
+                                <Path Name="bottomLine" Stroke="Gray" StrokeThickness="2" Fill="Transparent" Grid.Column="2"
+                                      Data="M 0,19 L 65,19"/>
+                                <Viewbox Grid.Column="1" Margin="-5" StretchDirection="DownOnly">
+                                    <TextBlock Text="{TemplateBinding Content}" Name="content"/>
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="leftEllipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="leftEllipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="rightEllipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="rightEllipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="topLine" Value="White"/>
+                                <Setter Property="Stroke" TargetName="bottomLine" Value="White"/>
+                                <Setter Property="Fill" TargetName="contentBackground" Value="Gray"/>
+                                <Setter Property="Foreground" TargetName="content" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsStylusOver" Value="true">
+                                <Setter Property="Stroke" TargetName="leftEllipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="leftEllipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="rightEllipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="rightEllipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="topLine" Value="White"/>
+                                <Setter Property="Stroke" TargetName="bottomLine" Value="White"/>
+                                <Setter Property="Fill" TargetName="contentBackground" Value="Gray"/>
+                                <Setter Property="Foreground" TargetName="content" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="leftEllipse" Value="Gray"/>
+                                <Setter Property="Fill" TargetName="leftEllipse" Value="White"/>
+                                <Setter Property="Stroke" TargetName="rightEllipse" Value="Gray"/>
+                                <Setter Property="Fill" TargetName="rightEllipse" Value="White"/>
+                                <Setter Property="Stroke" TargetName="topLine" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="bottomLine" Value="Gray"/>
+                                <Setter Property="Fill" TargetName="contentBackground" Value="White"/>
+                                <Setter Property="Foreground" TargetName="content" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="OKButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Width="20.00" Height="20.00">
+                            <Ellipse x:Name="Ellipse" Stroke="Gray" StrokeThickness="2" Fill="Transparent" />
+                            <Viewbox Width="10">
+                                <Path x:Name="Tick" Style="{StaticResource TickPath}" Stroke="Gray" StrokeThickness="10"/>
+                            </Viewbox>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="Ellipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="Ellipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="Tick" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsStylusOver" Value="true">
+                                <Setter Property="Stroke" TargetName="Ellipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="Ellipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="Tick" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="Ellipse" Value="Gray"/>
+                                <Setter Property="Fill" TargetName="Ellipse" Value="White"/>
+                                <Setter Property="Stroke" TargetName="Tick" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CancelButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Width="20.00" Height="20.00">
+                            <Ellipse x:Name="Ellipse" Stroke="Gray" StrokeThickness="2" Fill="Transparent" />
+                            <Line x:Name="Line1" StrokeThickness="2" X1="5" Y1="5" X2="15" Y2="15" Stroke="Gray"/>
+                            <Line x:Name="Line2" StrokeThickness="2" X1="15" Y1="5" X2="5" Y2="15" Stroke="Gray"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="true">
+                                <Setter Property="Stroke" TargetName="Ellipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="Ellipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="Line1" Value="White"/>
+                                <Setter Property="Stroke" TargetName="Line2" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsStylusOver" Value="true">
+                                <Setter Property="Stroke" TargetName="Ellipse" Value="White"/>
+                                <Setter Property="Fill" TargetName="Ellipse" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="Line1" Value="White"/>
+                                <Setter Property="Stroke" TargetName="Line2" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="true">
+                                <Setter Property="Stroke" TargetName="Ellipse" Value="Gray"/>
+                                <Setter Property="Fill" TargetName="Ellipse" Value="White"/>
+                                <Setter Property="Stroke" TargetName="Line1" Value="Gray"/>
+                                <Setter Property="Stroke" TargetName="Line2" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <LinearGradientBrush x:Key="BackgroundGradient"
+                             StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FAEFBF" Offset="0.0" />
+            <GradientStop Color="#EDB46D" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid FocusManager.FocusedElement="{Binding ElementName=TitleText}">
+        <Grid>
+            <Border Background="{StaticResource BackgroundGradient}" 
+                        Padding="2" 
+                        BorderBrush="Black" 
+                        Margin="7" 
+                        BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Note Header -->
+                    <Grid Grid.Row="0">
+                        <Grid.Background>
+                            <SolidColorBrush Color="DarkGray" Opacity="0.3"/>
+                        </Grid.Background>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1">
+                            <Button HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                Command="{Binding Path=DeleteCommand, FallbackValue={StaticResource NullCommand}}" Margin="2" Grid.Row="0" Grid.Column="0" Style="{StaticResource CancelButtonStyle}"/>
+                        </StackPanel>
+                        <TextBox x:Name="TitleText" Text="{Binding Path=Title, FallbackValue=Untitled, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="12"
+                                     IsReadOnly="{Binding Path=IsReadOnly, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                             Style="{StaticResource TitleTextBox}" Grid.Column="0"/>
+                        <Line Grid.ColumnSpan="2" Stretch="Fill" X1="1" VerticalAlignment="Bottom" Stroke="Black" Opacity="0.1" />
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <TextBox Text="{Binding Path=Content, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="{Binding Path=IsReadOnly, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                 Style="{StaticResource ContentStyle}"/>
+                    </ScrollViewer>
+                    <Border Grid.Row="2" CornerRadius="5" Name="DetailsInfo">
+                        <Border.Background>
+                            <SolidColorBrush Color="LightGray" Opacity="0.6"/>
+                        </Border.Background>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=IsMouseOver}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="FontSize" Value="11"/>
+                                    <Setter Property="FontWeight" Value="Light"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="2" Source="/Notes.Wpf;component/UI/Images/date.png" />
+                                <TextBlock Text="{Binding Path=Created, FallbackValue='Not saved', StringFormat={}{0:dd MMM yyyy HH:mm}}" />
+                            </StackPanel>
+
+                            <!--<StackPanel Orientation="Horizontal">
+                                <StackPanel.Style>
+                                    <Style TargetType="{x:Type StackPanel}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Username, FallbackValue={x:Null}}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Image Margin="2" Source="/Notes.Wpf;component/UI/Images/user.png" />
+                                <TextBlock Text="{Binding Path=Username}" />
+                            </StackPanel>-->
+                        </StackPanel>
+                    </Border>
+                    <ProgressBar VerticalAlignment="Bottom" Height="5" IsIndeterminate="true" Grid.ColumnSpan="2" Grid.RowSpan="3"
+                                 ToolTip="Busy syncing to the Database.">
+                        <ProgressBar.Style>
+                            <Style TargetType="{x:Type ProgressBar}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsBusy, FallbackValue=False}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ProgressBar.Style>
+                    </ProgressBar>
+                </Grid>
+            </Border>
+        </Grid>
+
+    </Grid>
+</UserControl>
